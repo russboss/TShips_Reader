@@ -49,7 +49,7 @@ namespace WindowsFormsApplication1
             Console.WriteLine("Hello");
             if (result == DialogResult.OK) // Test result.
             {
-
+                //add openfile for reading p422
                 string file = openFileDialog1.FileName;
 
                 Console.WriteLine("file: {0}", file);
