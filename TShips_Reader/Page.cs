@@ -91,14 +91,17 @@ namespace WindowsFormsApplication1
 
         public String toString()
         {
+            String str = "";
             if (getNext() != null)
             {
-                return getID() + " " + getTitle() + "\n" + getNext().toString();
+                str = getID() + " " + getTitle() + "\n" + this.getNext().toString();
+                return str;
             }
             else
             {
                 return "";
             }
+
         }
 
     }

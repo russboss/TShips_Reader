@@ -14,6 +14,7 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
+        bool DEBUG = false;
         private String tFileDir;
         private DialogResult result;
         private PageHandler TFile;
@@ -39,6 +40,13 @@ namespace WindowsFormsApplication1
 
         private void tShips_Click(object sender, EventArgs e)
         {
+                if(TFile != null){
+                    Console.WriteLine("Exists");
+                }
+                else
+                {
+                    Console.WriteLine("DNE");
+                }
 
         }
 
@@ -53,29 +61,33 @@ namespace WindowsFormsApplication1
                 string file = openFileDialog1.FileName;
 
                 Console.WriteLine("file: {0}", file);
+                int i = 0;
+                string temp = "";
                 try
                 {
+
                     int lastPage = 0;
                     String lastPageTitle = "";
                     string[] lines, lineTemp = null;
                     lines = File.ReadAllLines(file);
 
-                    for (int i = 0; i < lines.Length; i++)
+                    for (i = 0; i < lines.Length; i++)
                     {
                         //string[] newString = ip.Split(new[] { ",\u000B" }, StringSplitOptions.RemoveEmptyEntries);
                         //lineTemp = lines[i].Split(';');
+                        //
+                        lineTemp = lines[i].Split(new[] { "<", " id=\"", "\" title=\"", "\" descr=\"", "\">", "/t>", "/page", ">" }, StringSplitOptions.RemoveEmptyEntries);
 
-                        lineTemp = lines[i].Split(new[] { "<", " <", " id=\"", "\" title=\"", "\" descr=\"", "\">", "/t>", "/page", ">" }, StringSplitOptions.RemoveEmptyEntries);
 
-
-
-                        String temp = "";
-                        for (int j = 0; j < lineTemp.Length; j++)
+                        if (DEBUG == true)
                         {
-                            temp += lineTemp[j] + "|";
+                            temp = "";
+                            for (int j = 0; j < lineTemp.Length; j++)
+                            {
+                                temp += lineTemp[j] + "|";
+                            }
+                            Console.WriteLine(i + "/" + lines.Length + " line: " + temp);
                         }
-                        Console.WriteLine(i +"/"+ lines.Length + " line: " + temp);
-                        
                         if (lineTemp.Length > 2)//try to remove all blank lines from processing//not working
                         {
                             if (lineTemp[0].Equals("page", StringComparison.InvariantCultureIgnoreCase))
@@ -90,12 +102,28 @@ namespace WindowsFormsApplication1
                             else if (lineTemp[1].Equals("t", StringComparison.InvariantCultureIgnoreCase))
                             {
                                 //begin with t data entry in stored page
-                                int id = Convert.ToInt32(lineTemp[2]);
-                                //  0         1    2
-                                //    <t id="200">stuff</t>
-                                Console.WriteLine("add Data " + lastPage + " " + lineTemp[2]);
+                                //Console.WriteLine(lastPage +" "+ lineTemp[1]);
+                                if (lineTemp.Length > 3)
+                                {
+                                    int id = Convert.ToInt32(lineTemp[2]);
+                                    //  0         1    2     3
+                                    //    <t id="200">stuff<  /t>
 
-                                TFile.addData(lastPage, lastPageTitle, id, lineTemp[3]);
+                                    //Console.WriteLine("add Data " + lastPage + " " + lineTemp[2]);
+
+                                    TFile.addData(lastPage, lastPageTitle, id, lineTemp[3]);
+                                }
+                                else
+                                {
+                                    int id = Convert.ToInt32(lineTemp[2]);
+                                    //  0         1    2     3
+                                    //    <t id="200">stuff<  /t>
+                                    //Console.WriteLine("add Data " + lastPage + " " + lineTemp[2]);
+
+                                    TFile.addData(lastPage, lastPageTitle, id, "");
+
+                                }
+                                
                             }
                             else
                             {
@@ -104,7 +132,7 @@ namespace WindowsFormsApplication1
                         }
                     }
 
-                    Console.WriteLine( TFile.printPageList() );
+                    Console.WriteLine(" Page List:\n" + TFile.printPageList() );
 
                     /*
                     if(saveFileDialog1.ShowDialog() == DialogResult.OK){
@@ -117,8 +145,12 @@ namespace WindowsFormsApplication1
                 }
                 catch (Exception err)
                 {
-                    Console.WriteLine(err);
+                    if (DEBUG == true)
+                    {
+                        Console.WriteLine(err + " \ni:" + i + "\nline: " + temp);
+                    }
                 }
+
             }
 
         }

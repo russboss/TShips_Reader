@@ -49,14 +49,15 @@ namespace WindowsFormsApplication1
                             newEntry.setPrev(temp);
                             break;
                         }
-                        else if ((newEntry.compareTo(temp) < 0) && (newEntry.compareTo(temp.getNext()) < 0))
+                        else if ((newEntry.compareTo(temp) > 0) && (newEntry.compareTo(temp.getNext()) < 0))
                         {
                             //add newEntry between 
-                            newEntry.setNext(temp);
-                            newEntry.setPrev(temp.getPrev());
-                            temp.getPrev().setNext(newEntry);
-                            temp.setPrev(newEntry);
+                            newEntry.setPrev(temp);
+                            newEntry.setNext(temp.getNext() );
+                            newEntry.getNext().setPrev(newEntry);
+                            temp.setNext(newEntry);
 
+                            break;
                         }
                         else
                         {
