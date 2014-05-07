@@ -12,7 +12,7 @@ namespace WindowsFormsApplication1
 
         public Page addPage(int PageId, String title)
         {
-            // currently sorded by text
+            // currently sorted by text
             // should be fewer pages by that
             //possibly seperate list to sort by int to increase search speed?
             Page newEntry = new Page(PageId, title);
@@ -78,5 +78,9 @@ namespace WindowsFormsApplication1
         }
 
 
+        public string printPageList()
+        {
+            return PageList.toString();
+        }
     }
 }

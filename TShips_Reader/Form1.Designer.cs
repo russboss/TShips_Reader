@@ -32,6 +32,7 @@
             this.tFile = new System.Windows.Forms.Button();
             this.readTfile = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // tShips
@@ -88,6 +89,7 @@
         private System.Windows.Forms.Button tFile;
         private System.Windows.Forms.Button readTfile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

@@ -7,15 +7,11 @@ namespace WindowsFormsApplication1
 {
     class Page
     {
-        private int pageId;
-        private String title;
-        private List<Data> DataList = null;
-
-
-
         private Page next = null;
         private Page prev = null;
-
+        private List<Data> DataList = null;
+        private String title;
+        private int pageId;
 
         public Page(int newPageId, String newTitle)
         {

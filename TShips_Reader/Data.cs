@@ -5,11 +5,11 @@ using System.Text;
 
 namespace WindowsFormsApplication1
 {
-    class Data
+    class Data : IComparable<Data>
     {
 
-        private int ID;
         private String DataLine;
+        private int ID;
 
         public Data(int newID, String newDataLine)
         {
