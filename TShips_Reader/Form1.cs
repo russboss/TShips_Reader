@@ -15,7 +15,7 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
         bool DEBUG = false;
-        private String tFileDir;
+        private String [] tFileDir;
         private DialogResult result;
         private PageHandler TFile;
         public Form1()
@@ -29,12 +29,14 @@ namespace WindowsFormsApplication1
         private void tFile_Click(object sender, EventArgs e)
         {
             //openFileDialog1 is added via [Design] as component
-            result = openFileDialog1.ShowDialog(); // Show the dialog.
+            result = openFileTFile.ShowDialog(); // Show the dialog.
             if (result == DialogResult.OK) // Test result.
             {
-                tFileDir = openFileDialog1.FileName;
-
-                Console.WriteLine(tFileDir);
+                tFileDir = openFileTFile.FileNames;
+                for (int i = 0; i < tFileDir.Length; i++)
+                {
+                    Console.WriteLine(tFileDir[i]);
+                }
             }
         }
 
@@ -55,18 +57,51 @@ namespace WindowsFormsApplication1
 
             if (result == DialogResult.OK) // Test result.
             {
+                
+                string[] file = openFileTFile.FileNames;
+                bool[] err = new bool[file.Length];
+                string str = "";
+                string OK = "OK",FAIL="FAIL";
                 //add openfile for reading p422
-                string file = openFileDialog1.FileName;
-                //string [] file = openFileDialog1.FileNames;
-                for (int q = 0; q < file.Length; q++ )
+                //string file = openFileDialog1.FileName;
+                
+                for (int i= 0; i < file.Length; i++ )
                 {
-                    Console.WriteLine("file: {0}\n" + file[q]);
+                    
+                    err[i] = readFileIntoStructure(file[i]);
+                    if (err[i] == true){
+                        str = OK;
+                    }else{
+                        str = FAIL;
+                    }
+                    Console.WriteLine("file: " + file[i] +" - " + str );
                 }
-                int i = 0;
-                string temp = "";
-                try
-                {
 
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            if(saveFileDialog1.ShowDialog() == DialogResult.OK){
+                //File.WriteAllText(fileName, textToWrite);
+                File.WriteAllText(saveFileDialog1.FileName, TFile.printPageList() );
+
+            }
+            
+            Console.WriteLine("DONE");
+
+        }
+
+        private bool readFileIntoStructure(string file)
+        {
+            int i = 0;
+            string temp = "";
+            try
+            {
+                if (File.Exists(file))
+                {
                     int lastPage = 0;
                     String lastPageTitle = "";
                     string[] lines, lineTemp = null;
@@ -123,7 +158,7 @@ namespace WindowsFormsApplication1
                                     TFile.addData(lastPage, lastPageTitle, id, "");
 
                                 }
-                                
+
                             }
                             else
                             {
@@ -132,7 +167,7 @@ namespace WindowsFormsApplication1
                         }
                     }
 
-                    Console.WriteLine(" Page List:\n" + TFile.printPageList() );
+                    //Console.WriteLine(" Page List:\n" + TFile.printPageList());
 
                     /*
                     if(saveFileDialog1.ShowDialog() == DialogResult.OK){
@@ -140,34 +175,25 @@ namespace WindowsFormsApplication1
                         File.WriteAllText(saveFileDialog1.FileName, TFile.printPageList() );
                     }
                     */
-                    Console.WriteLine("DONE");
-
+                    //Console.WriteLine("DONE");
+                    return true;
                 }
-                catch (Exception err)
+                else
                 {
-                    if (DEBUG == true)
-                    {
-                        Console.WriteLine(err + " \ni:" + i + "\nline: " + temp);
-                    }
+                    return false;
                 }
-
+            }
+            catch (Exception err)
+            {
+                if (DEBUG == true)
+                {
+                    Console.WriteLine(err + " \ni:" + i + "\nline: " + temp);
+                }
+                return false;
             }
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            if(saveFileDialog1.ShowDialog() == DialogResult.OK){
-                //File.WriteAllText(fileName, textToWrite);
-                File.WriteAllText(saveFileDialog1.FileName, TFile.printPageList() );
-
-            }
-            
-            Console.WriteLine("DONE");
 
         }
-
 
     }
 }

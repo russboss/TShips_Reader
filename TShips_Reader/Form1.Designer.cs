@@ -31,21 +31,10 @@
             this.tShips = new System.Windows.Forms.Button();
             this.tFile = new System.Windows.Forms.Button();
             this.readTfile = new System.Windows.Forms.Button();
-            
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            //list of valid files to open
-            openFileDialog1.Multiselect = true;//allow multiple files to be selected
-            openFileDialog1.Filter = "XML (*.xml)|*.xml|Text Files (*.txt)|*.txt|All files (*.*)|*.*";// "txt";//"Text files (*.txt)|*.txt|All files (*.*)|*.*"
-            
-            
+            this.openFileTFile = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            saveFileDialog1.DefaultExt = ".txt";
-            saveFileDialog1.AddExtension = true;//auto add DefaultExt if none
-            //list of valid extensions to save as
-            saveFileDialog1.Filter = "All files (*.*)|*.*|Text Files (*.txt)|*.txt";
-            saveFileDialog1.FilterIndex = 2;//default file type to save as by index...filter list has index starting at 1...second entry has index=2 
-
             this.button1 = new System.Windows.Forms.Button();
+            this.openFileTShips = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // tShips
@@ -78,9 +67,17 @@
             this.readTfile.UseVisualStyleBackColor = true;
             this.readTfile.Click += new System.EventHandler(this.readTfile_Click);
             // 
-            // openFileDialog1
+            // openFileTFile
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileTFile.FileName = "0001-L44.xml";
+            this.openFileTFile.Filter = "XML (*.xml)|*.xml|Text Files (*.txt)|*.txt|All files (*.*)|*.*";
+            this.openFileTFile.Multiselect = true;
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "txt";
+            this.saveFileDialog1.Filter = "All files (*.*)|*.*|Text Files (*.txt)|*.txt";
+            this.saveFileDialog1.FilterIndex = 2;
             // 
             // button1
             // 
@@ -91,6 +88,10 @@
             this.button1.Text = "Save Page List";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // openFileTShips
+            // 
+            this.openFileTShips.FileName = "TShips.xml";
             // 
             // Form1
             // 
@@ -112,9 +113,10 @@
         private System.Windows.Forms.Button tShips;
         private System.Windows.Forms.Button tFile;
         private System.Windows.Forms.Button readTfile;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileTFile;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.OpenFileDialog openFileTShips;
     }
 }
 
