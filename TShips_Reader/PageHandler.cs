@@ -77,11 +77,21 @@ namespace WindowsFormsApplication1
                   temp.addData(dataId,newData);
               }
         }
-
+        //public void 
 
         public string printPageList()
         {
             return PageList.toString();
+        }
+
+        public bool isEmpty()
+        {
+            if (PageList == null)
+            {
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 }

@@ -42,43 +42,59 @@ namespace WindowsFormsApplication1
 
         private void tShips_Click(object sender, EventArgs e)
         {
-                if(TFile != null){
-                    Console.WriteLine("Exists");
+                if(TFile.isEmpty() == false){
+
+                    result = openFileTFile.ShowDialog(); // Show the dialog.
+                    if (result == DialogResult.OK) // Test result.
+                    {
+                        tFileDir = openFileTFile.FileNames;
+                        for (int i = 0; i < tFileDir.Length; i++)
+                        {
+                            Console.WriteLine(tFileDir[i]);
+                        }
+                    }
+
                 }
                 else
                 {
-                    Console.WriteLine("DNE");
+                    MessageBox.Show(this, "TFile(s) have not been selected");
                 }
 
         }
 
         private void readTfile_Click(object sender, EventArgs e)
         {
-
             if (result == DialogResult.OK) // Test result.
             {
-                
-                string[] file = openFileTFile.FileNames;
+                MessageBox.Show( readTFile() );
+            }
+        }
+
+
+        public string readTFile()
+        {
+                string[] file = openFileTFile.FileNames, fileName;
                 bool[] err = new bool[file.Length];
                 string str = "";
                 string OK = "OK",FAIL="FAIL";
+                string report = "";
+                string[] splitSymbol = new [] { "\\" };
                 //add openfile for reading p422
                 //string file = openFileDialog1.FileName;
                 
                 for (int i= 0; i < file.Length; i++ )
                 {
-                    
                     err[i] = readFileIntoStructure(file[i]);
                     if (err[i] == true){
                         str = OK;
                     }else{
                         str = FAIL;
                     }
+                    fileName = file[i].Split(splitSymbol, StringSplitOptions.RemoveEmptyEntries);
+                    report += fileName[fileName.Length-1] + " - " + str + "\n";
                     Console.WriteLine("file: " + file[i] +" - " + str );
                 }
-
-            }
-
+                return report;
         }
 
         private void button1_Click(object sender, EventArgs e)
