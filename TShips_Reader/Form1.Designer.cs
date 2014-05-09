@@ -31,8 +31,21 @@
             this.tShips = new System.Windows.Forms.Button();
             this.tFile = new System.Windows.Forms.Button();
             this.readTfile = new System.Windows.Forms.Button();
+            
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            //list of valid files to open
+            openFileDialog1.Multiselect = true;//allow multiple files to be selected
+            openFileDialog1.Filter = "XML (*.xml)|*.xml|Text Files (*.txt)|*.txt|All files (*.*)|*.*";// "txt";//"Text files (*.txt)|*.txt|All files (*.*)|*.*"
+            
+            
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            saveFileDialog1.DefaultExt = ".txt";
+            saveFileDialog1.AddExtension = true;//auto add DefaultExt if none
+            //list of valid extensions to save as
+            saveFileDialog1.Filter = "All files (*.*)|*.*|Text Files (*.txt)|*.txt";
+            saveFileDialog1.FilterIndex = 2;//default file type to save as by index...filter list has index starting at 1...second entry has index=2 
+
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tShips
@@ -69,11 +82,22 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(177, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(92, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Save Page List";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(397, 262);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.readTfile);
             this.Controls.Add(this.tFile);
             this.Controls.Add(this.tShips);
@@ -90,6 +114,7 @@
         private System.Windows.Forms.Button readTfile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

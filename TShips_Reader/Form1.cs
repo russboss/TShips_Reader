@@ -53,14 +53,15 @@ namespace WindowsFormsApplication1
         private void readTfile_Click(object sender, EventArgs e)
         {
 
-
-            Console.WriteLine("Hello");
             if (result == DialogResult.OK) // Test result.
             {
                 //add openfile for reading p422
                 string file = openFileDialog1.FileName;
-
-                Console.WriteLine("file: {0}", file);
+                //string [] file = openFileDialog1.FileNames;
+                for (int q = 0; q < file.Length; q++ )
+                {
+                    Console.WriteLine("file: {0}\n" + file[q]);
+                }
                 int i = 0;
                 string temp = "";
                 try
@@ -70,7 +71,6 @@ namespace WindowsFormsApplication1
                     String lastPageTitle = "";
                     string[] lines, lineTemp = null;
                     lines = File.ReadAllLines(file);
-
                     for (i = 0; i < lines.Length; i++)
                     {
                         //string[] newString = ip.Split(new[] { ",\u000B" }, StringSplitOptions.RemoveEmptyEntries);
@@ -152,6 +152,19 @@ namespace WindowsFormsApplication1
                 }
 
             }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            if(saveFileDialog1.ShowDialog() == DialogResult.OK){
+                //File.WriteAllText(fileName, textToWrite);
+                File.WriteAllText(saveFileDialog1.FileName, TFile.printPageList() );
+
+            }
+            
+            Console.WriteLine("DONE");
 
         }
 
