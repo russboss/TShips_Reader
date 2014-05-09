@@ -47,11 +47,17 @@ namespace WindowsFormsApplication1
                     result = openFileTFile.ShowDialog(); // Show the dialog.
                     if (result == DialogResult.OK) // Test result.
                     {
+                        //ask where to save file
                         tFileDir = openFileTFile.FileNames;
-                        for (int i = 0; i < tFileDir.Length; i++)
-                        {
-                            Console.WriteLine(tFileDir[i]);
-                        }
+                        MessageBox.Show(readTFile());//process TFiles and build report
+                        //process TShip file    
+                        //start processing TShip and TFile together output each ship/line to file
+                        //show progress bar during all processes...possibly on processsing window
+                            //processing TFiles (one bar for each file)
+                            //processing TShip (one bar)
+                            //processing ship List (one bar)
+
+                    
                     }
 
                 }

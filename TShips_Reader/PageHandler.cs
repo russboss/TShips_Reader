@@ -9,6 +9,19 @@ namespace WindowsFormsApplication1
     {
 
         private Page PageList;
+        /// <summary>
+        /// find all pages with matching name
+        /// find id on highest PageID first (highest overrides lowest if collision)
+        /// </summary>
+        /// <param name="pageName">search pagename that describes the object  (ships-> Boardcomp. objects)</param>
+        /// <param name="ID">ID that object refers to</param>
+        /// <returns>Data entry that is stored in (pageName,ID</returns>
+        public string findData(String pageName, int ID ){
+
+            
+            return "";
+        }
+
 
         public Page addPage(int PageId, String title)
         {
