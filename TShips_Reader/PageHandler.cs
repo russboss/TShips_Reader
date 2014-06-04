@@ -13,14 +13,46 @@ namespace WindowsFormsApplication1
         /// find all pages with matching name
         /// find id on highest PageID first (highest overrides lowest if collision)
         /// </summary>
-        /// <param name="pageName">search pagename that describes the object  (ships-> Boardcomp. objects)</param>
+        /// <param name="pageName">search pageName that describes the object  (ships-> Boardcomp. objects)</param>
         /// <param name="ID">ID that object refers to</param>
         /// <returns>Data entry that is stored in (pageName,ID</returns>
         public string findData(String pageName, int ID ){
+            if (PageList != null) {
+
+                Page pageFound = findPage(pageName);
+                if (pageFound != null)
+                {
+                    //lookup data from page
+                    //pageFound.
+                }
+
+
+            } else {
+                return "";
+            }
 
             
             return "";
         }
+
+        private Page findPage(string pageSearch)
+        {
+            Page current = PageList;
+
+            while (current != null)
+            {
+                if (current.getTitle().CompareTo(pageSearch) == 0)
+                {
+                    return current;
+                }
+                else
+                {
+                    current = current.getNext();
+                }
+            }            
+            return null;
+        }
+
 
 
         public Page addPage(int PageId, String title)
@@ -40,7 +72,7 @@ namespace WindowsFormsApplication1
                 {
                     if (newEntry.compareTo(temp) == 0)
                     {
-                        // add all id lines to page
+                        // add all id lines to page//store id in Page as list
                         //delete newEntry or set to null
                         newEntry = temp;
                         break;

@@ -30,8 +30,28 @@ namespace WindowsFormsApplication1
         }
         public int CompareTo(Data B)
         {
-            return getID().CompareTo(B.getID());
+            if (B == null)
+            {
+                return 1;
+            }
+
+            Data otherData = B as Data;
+            if (this.getID() < otherData.getID())
+            {
+                return -1;
+            }
+            else if (this.getID() > otherData.getID())
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
         }
+
+
+
 
     }
 }

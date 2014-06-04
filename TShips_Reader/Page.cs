@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 
@@ -9,7 +9,9 @@ namespace WindowsFormsApplication1
     {
         private Page next = null;
         private Page prev = null;
-        private List<Data> DataList = null;
+        
+        //switch List to sth that could allow for easy searching
+        //private List<Data> DataList = null;
         private String title;
         private int pageId;
 
@@ -17,7 +19,7 @@ namespace WindowsFormsApplication1
         {
             pageId = newPageId;
             title = newTitle;
-            DataList = new List<Data>();
+            //DataList = new List<Data>();
 
 
         }
@@ -42,6 +44,15 @@ namespace WindowsFormsApplication1
             }
         }
 
+        public Data getData(Page page, int dataId){
+            //search for data by id
+            //return the stored string?
+            Data ret =null;
+            
+
+
+            return ret;
+        }
         public void addData(int newID, String newData)
         {
             Data newDataObj = new Data(newID, newData);
