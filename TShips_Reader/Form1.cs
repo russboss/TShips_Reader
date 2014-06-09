@@ -42,8 +42,10 @@ namespace WindowsFormsApplication1
 
         private void tShips_Click(object sender, EventArgs e)
         {
+            Console.Out.WriteLine("made it to here");
                 if(TFile.isEmpty() == false){
-
+                    TFile.printPageList();
+                    /*
                     result = openFileTFile.ShowDialog(); // Show the dialog.
                     if (result == DialogResult.OK) // Test result.
                     {
@@ -59,13 +61,13 @@ namespace WindowsFormsApplication1
 
                     
                     }
-
+                    */
                 }
                 else
                 {
                     MessageBox.Show(this, "TFile(s) have not been selected");
                 }
-
+                Console.Out.Write("==============================================");
         }
 
         private void readTfile_Click(object sender, EventArgs e)
@@ -74,6 +76,8 @@ namespace WindowsFormsApplication1
             {
                 MessageBox.Show( readTFile() );
             }
+
+            Console.WriteLine("");
         }
 
 
@@ -90,6 +94,10 @@ namespace WindowsFormsApplication1
                 
                 for (int i= 0; i < file.Length; i++ )
                 {
+                    for (int j = 0; j < file.Length; j++)
+                    {
+                        Console.Out.WriteLine("file: "+file[j]);
+                    }
                     err[i] = readFileIntoStructure(file[i]);
                     if (err[i] == true){
                         str = OK;

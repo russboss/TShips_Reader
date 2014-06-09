@@ -50,7 +50,12 @@ namespace WindowsFormsApplication1
             }
         }
 
+        public String toString()
+        {
 
+
+            return ( getID()+","+getData() );
+        }
 
 
     }

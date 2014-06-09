@@ -23,16 +23,19 @@ namespace WindowsFormsApplication1
                 if (pageFound != null)
                 {
                     //lookup data from page
-                    //pageFound.
+                    return pageFound.getData(ID);
+                }
+                else
+                {
+                    //throw PageNotFound error
+                    return "";
                 }
 
-
             } else {
+                //throw EmptyPageList error
+
                 return "";
             }
-
-            
-            return "";
         }
 
         private Page findPage(string pageSearch)
